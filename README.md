@@ -14,10 +14,16 @@ The goal is to find such a set $I$ with the maximum possible number of vertices.
 ### Decision Variables
 Let $x = \{x_i | x_i \in \{0, 1\}\}$ be the set of binary decision variables for each vertex $i \in V$
 
-$x_i = \begin{cases} 1, i \in I \\ 0, i \notin I \end{cases}$
+```math
+x_i = \begin{cases} 1, i \in I \\ 0, i \notin I \end{cases}
+```
 
 ### Constraints
-$\forall (i, j) \in E, x_i + x_j \leq 1$
+```math
+\forall (i, j) \in E, x_i + x_j \leq 1
+```
 
 ### Objective Function
-$\max \left( \sum_{i \in V} x_i \right)$
+```math
+\max \left( \sum_{i \in V} x_i \right)
+```
