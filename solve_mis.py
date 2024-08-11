@@ -1,5 +1,5 @@
 import gurobipy as gp
-from gurobipy import GRB, Model, quicksum
+from gurobipy import GRB, quicksum
 import pandas as pd
 import argparse
 from write_edges import *
@@ -9,10 +9,10 @@ from draw_edges import *
 argParser = argparse.ArgumentParser()
 
 # add command line arguments
-argParser.add_argument('--nodes_per_layer', type = int, default = 3, help = 'Number of nodes per graph layer [default=3]')
-argParser.add_argument('--num_layers', type = int, default = 3, help = 'Number of layers in the graph [default=3]')
-argParser.add_argument('--max_num_sol', type = int, default = 100, help = 'Maximum number of optimal solutions returned by Gurobi [default=1000]')
-argParser.add_argument('--edges_filepath', type = str, default = 'sample_edges.csv', help = 'Relative filepath to write/read edges csv file [default=edges.csv]')
+argParser.add_argument('-n', '--nodes_per_layer', type = int, default = 3, help = 'Number of nodes per graph layer [default=3]')
+argParser.add_argument('-l', '--num_layers', type = int, default = 3, help = 'Number of layers in the graph [default=3]')
+argParser.add_argument('-m', '--max_num_sol', type = int, default = 100, help = 'Maximum number of optimal solutions returned by Gurobi [default=100]')
+argParser.add_argument('-e', '--edges_filepath', type = str, default = 'sample_edges.csv', help = 'Relative filepath to write edges csv file [default=edges.csv]')
 
 # parse arguments
 args = argParser.parse_args()

@@ -5,7 +5,7 @@ from draw_edges import *
 argParser = argparse.ArgumentParser()
 
 # add command line argument
-argParser.add_argument('--edges_filepath', type = str, default = 'sample_edges.csv', help = 'Relative filepath to write/read edges csv file [default=edges.csv]')
+argParser.add_argument('-e', '--edges_filepath', type = str, default = 'sample_edges.csv', help = 'Relative filepath to write/read edges csv file [default=edges.csv]')
 
 # parse argument
 args = argParser.parse_args()
