@@ -14,7 +14,7 @@ def draw_graph(edge_file, additional_edges = None):
 
     pos = nx.spring_layout(graph, seed = 23456, k = 0.2)
 
-    nx.draw(graph, pos, with_labels = True, node_color = 'lightblue', node_size=100, font_size=4)
+    nx.draw(graph, pos, with_labels = True, node_color = 'lightblue', node_size = 300, font_size = 12)
 
     if additional_edges is not None:
         new_edges = []
@@ -33,6 +33,6 @@ def draw_graph(edge_file, additional_edges = None):
 
         # Add the textbox to the Axes object
         ax.text(x_pos, y_pos, textbox_text, transform = ax.transAxes, fontsize = 14, color = 'red',
-                bbox = dict(facecolor = 'white', edgecolor = 'black', boxstyle = 'round,pad = 0.5'), ha = 'center')
+                bbox = dict(facecolor = 'white', edgecolor = 'black', boxstyle = 'round, pad = 0.5'), ha = 'center')
 
     return(plt)
