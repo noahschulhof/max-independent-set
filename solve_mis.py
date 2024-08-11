@@ -12,19 +12,24 @@ argParser = argparse.ArgumentParser()
 argParser.add_argument('-n', '--nodes_per_layer', type = int, default = 3, help = 'Number of nodes per graph layer [default=3]')
 argParser.add_argument('-l', '--num_layers', type = int, default = 3, help = 'Number of layers in the graph [default=3]')
 argParser.add_argument('-m', '--max_num_sol', type = int, default = 100, help = 'Maximum number of optimal solutions returned by Gurobi [default=100]')
-argParser.add_argument('-e', '--edges_filepath', type = str, default = 'sample_edges.csv', help = 'Relative filepath to write edges csv file [default=edges.csv]')
+argParser.add_argument('-e', '--edges_filepath', type = str, default = None, help = 'Filepath from which to read edges')
 
 # parse arguments
 args = argParser.parse_args()
 
-# remove edges csv file if it exists
-remove_edge_file(args.edges_filepath)
+if args.edges_filepath:
+    edges_fp = args.edges_filepath
+else:
+    edges_fp = 'edges.csv'
 
-# write edges csv file
-write_edges(args.nodes_per_layer, args.num_layers, args.edges_filepath)
+    # remove default edges csv file if it exists
+    remove_edge_file(edges_fp)
+
+    # write edges csv file
+    write_edges(args.nodes_per_layer, args.num_layers, edges_fp)
 
 # read edges csv file
-df = pd.read_csv(args.edges_filepath, header = None)
+df = pd.read_csv(edges_fp, header = None)
 
 # get number of nodes in graph
 num_nodes = int(df.values.max()) + 1
@@ -68,13 +73,13 @@ if model.status == GRB.OPTIMAL:
         independent_set_list.append([j for j, var in enumerate(x_vars) if var.xn == 1])
     max_independent_set_length = max([len(x) for x in independent_set_list])
     optimal_independent_set_list = [sublist for sublist in independent_set_list if len(sublist) == max_independent_set_length]
-    for i, independent_set in enumerate(optimal_independent_set_list):
-        print(f'SOLUTION #{i}')
+    for i, independent_set in enumerate(optimal_independent_set_list, 1):
+        print(f'\nSOLUTION #{i}')
         print(f'Maximum Independent Set: {independent_set}')
-        print(f'Number of nodes: {len(independent_set)}\n')
+        print(f'Number of nodes: {len(independent_set)}')
 else:
     print('No solution found.')
 
 # draw solved graph
-solved_graph = draw_graph(args.edges_filepath, independent_set)
+solved_graph = draw_graph(edges_fp, independent_set)
 solved_graph.show()
