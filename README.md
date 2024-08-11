@@ -1,6 +1,6 @@
 # max-independent-set
 
-In graph theory, the ***Maximum Independent Set*** of a graph $G = (V, E)$ is defined as the largest subset of vertices $I \subseteq V$ such that no two vertices in $I$ are adjacent. Formally, it satisfies the following conditions:
+In graph theory, the ***Maximum Independent Set (MIS)*** of a graph $G = (V, E)$ is defined as the largest subset of vertices $I \subseteq V$ such that no two vertices in $I$ are adjacent. Formally, it satisfies the following conditions:
 
 1. **Independence:** For any two vertices $(u, v) \in I$, there is no edge $(u, v) \in E$. That is, $\forall (u, v) \in I, (u, v) \notin E$.
 2. **Maximality:** There is no other independent set $I'$ such that $I \subset I'$. That is, $I$ is not strictly a subset of any other independent set in $G$.
@@ -8,7 +8,7 @@ In graph theory, the ***Maximum Independent Set*** of a graph $G = (V, E)$ is de
 The goal is to find such a set $I$ with the maximum possible number of vertices.
 
 ## Linear Optimization Formulation
-The *Maximum Independent Set* problem can be formulated as a linear optimization instance as follows:
+The *MIS* problem can be formulated as a linear optimization instance as follows:
 
 ### Decision Variables
 Let $`x = \{x_i | x_i \in \{0, 1\}\}`$ be the set of binary decision variables for each vertex $i \in V$
@@ -48,3 +48,36 @@ $ conda install networkx
 ### Obtaining a Gurobi License
 To use the Gurobi Optimizer, a valid license is required. A guide to the available licenses can be found [here](https://support.gurobi.com/hc/en-us/articles/12684663118993-How-do-I-obtain-a-Gurobi-license).
 
+
+## Initializing and Solving an *MIS* Instance
+
+### Sample Run
+```bash
+$ python3 solve_mis.py
+```
+
+### Arguments
+|Argument|Default|Description|
+|--------|-------|-----------|
+|`-n/--nodes_per_layer`|3|Number of nodes in each graph layer|
+|`-l/--num_layers`|3|Number of uniform graph layers|
+|`-m/--max_num_sol`|100|Maximum number of MIS solutions|
+|`-e/--edges_filepath`|`None`|Filepath to existing edges file|
+
+### Sample Output
+![Solved Graph](samples/sample_output.png)
+
+## Visualizing an Unsolved Graph
+
+### Sample Run
+```bash
+$ python3 draw_unsolved_graph.py -e samples/sample_edges.csv
+```
+
+### Arguments
+|Argument|Description|
+|--------|-----------|
+|`-e/--edges_filepath`|Filepath to existing edges file|
+
+### Sample Output
+![Unsolved Graph](samples/sample_unsolved.png)
