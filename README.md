@@ -12,7 +12,7 @@ The goal is to find such a set $I$ with the maximum possible number of vertices.
 ## Linear Optimization Formulation
 
 ### Decision Variables
-Let $x = \{x_i | x_i \in \{0, 1\}\}$ be the set of binary decision variables for each vertex $i \in V$
+Let $`x = \{x_i | x_i \in \{0, 1\}\}`$ be the set of binary decision variables for each vertex $i \in V$
 
 ```math
 x_i = \begin{cases} 1, i \in I \\ 0, i \notin I \end{cases}
@@ -23,7 +23,11 @@ x_i = \begin{cases} 1, i \in I \\ 0, i \notin I \end{cases}
 \forall (i, j) \in E, x_i + x_j \leq 1
 ```
 
+For each edge, the sum of its vertex decision variables cannot exceed 1.
+
 ### Objective Function
 ```math
 \max \left( \sum_{i \in V} x_i \right)
 ```
+
+Maximize the sum of the decision variables; i.e., maximize the number of vertices in the set.
